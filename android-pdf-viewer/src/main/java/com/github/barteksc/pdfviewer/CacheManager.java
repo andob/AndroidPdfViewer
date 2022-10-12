@@ -16,10 +16,7 @@
 package com.github.barteksc.pdfviewer;
 
 import android.graphics.RectF;
-import android.support.annotation.Nullable;
-
 import com.github.barteksc.pdfviewer.model.PagePart;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -39,9 +36,8 @@ class CacheManager {
 
     private final Object passiveActiveLock = new Object();
 
-    private final PagePartComparator orderComparator = new PagePartComparator();
-
     public CacheManager() {
+        PagePartComparator orderComparator = new PagePartComparator();
         activeCache = new PriorityQueue<>(CACHE_SIZE, orderComparator);
         passiveCache = new PriorityQueue<>(CACHE_SIZE, orderComparator);
         thumbnails = new ArrayList<>();
@@ -136,7 +132,6 @@ class CacheManager {
         collection.add(newPart);
     }
 
-    @Nullable
     private static PagePart find(PriorityQueue<PagePart> vector, PagePart fakePart) {
         for (PagePart part : vector) {
             if (part.equals(fakePart)) {
@@ -179,7 +174,7 @@ class CacheManager {
         }
     }
 
-    class PagePartComparator implements Comparator<PagePart> {
+    static class PagePartComparator implements Comparator<PagePart> {
         @Override
         public int compare(PagePart part1, PagePart part2) {
             if (part1.getCacheOrder() == part2.getCacheOrder()) {

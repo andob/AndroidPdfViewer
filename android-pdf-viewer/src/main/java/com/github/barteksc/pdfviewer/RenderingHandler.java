@@ -16,7 +16,6 @@
 package com.github.barteksc.pdfviewer;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -41,11 +40,11 @@ class RenderingHandler extends Handler {
 
     private static final String TAG = RenderingHandler.class.getName();
 
-    private PDFView pdfView;
+    private final PDFView pdfView;
 
-    private RectF renderBounds = new RectF();
-    private Rect roundedRenderBounds = new Rect();
-    private Matrix renderMatrix = new Matrix();
+    private final RectF renderBounds = new RectF();
+    private final Rect roundedRenderBounds = new Rect();
+    private final Matrix renderMatrix = new Matrix();
     private boolean running = false;
 
     RenderingHandler(Looper looper, PDFView pdfView) {
@@ -131,7 +130,7 @@ class RenderingHandler extends Handler {
         running = true;
     }
 
-    private class RenderingTask {
+    private static class RenderingTask {
 
         float width, height;
 

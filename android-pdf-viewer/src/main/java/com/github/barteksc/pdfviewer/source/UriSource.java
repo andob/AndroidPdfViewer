@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class UriSource implements DocumentSource {
 
-    private Uri uri;
+    private final Uri uri;
 
     public UriSource(Uri uri) {
         this.uri = uri;

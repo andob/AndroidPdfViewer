@@ -35,14 +35,14 @@ class PdfFile {
 
     private static final Object lock = new Object();
     private PdfDocument pdfDocument;
-    private PdfiumCore pdfiumCore;
+    private final PdfiumCore pdfiumCore;
     private int pagesCount = 0;
     /** Original page sizes */
-    private List<Size> originalPageSizes = new ArrayList<>();
+    private final List<Size> originalPageSizes = new ArrayList<>();
     /** Scaled page sizes */
-    private List<SizeF> pageSizes = new ArrayList<>();
+    private final List<SizeF> pageSizes = new ArrayList<>();
     /** Opened pages with indicator whether opening was successful */
-    private SparseBooleanArray openedPages = new SparseBooleanArray();
+    private final SparseBooleanArray openedPages = new SparseBooleanArray();
     /** Page with maximum width */
     private Size originalMaxWidthPageSize = new Size(0, 0);
     /** Page with maximum height */
@@ -52,15 +52,15 @@ class PdfFile {
     /** Scaled page with maximum width */
     private SizeF maxWidthPageSize = new SizeF(0, 0);
     /** True if scrolling is vertical, else it's horizontal */
-    private boolean isVertical;
+    private final boolean isVertical;
     /** Fixed spacing between pages in pixels */
-    private int spacingPx;
+    private final int spacingPx;
     /** Calculate spacing automatically so each page fits on it's own in the center of the view */
-    private boolean autoSpacing;
+    private final boolean autoSpacing;
     /** Calculated offsets for pages */
-    private List<Float> pageOffsets = new ArrayList<>();
+    private final List<Float> pageOffsets = new ArrayList<>();
     /** Calculated auto spacing for pages */
-    private List<Float> pageSpacing = new ArrayList<>();
+    private final List<Float> pageSpacing = new ArrayList<>();
     /** Calculated document length (width or height, depending on swipe mode) */
     private float documentLength = 0;
     private final FitPolicy pageFitPolicy;

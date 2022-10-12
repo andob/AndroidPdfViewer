@@ -33,11 +33,11 @@ import android.widget.OverScroller;
  */
 class AnimationManager {
 
-    private PDFView pdfView;
+    private final PDFView pdfView;
 
     private ValueAnimator animation;
 
-    private OverScroller scroller;
+    private final OverScroller scroller;
 
     private boolean flinging = false;
 

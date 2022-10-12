@@ -20,7 +20,7 @@ import com.shockwave.pdfium.util.SizeF;
 
 public class PageSizeCalculator {
 
-    private FitPolicy fitPolicy;
+    private final FitPolicy fitPolicy;
     private final Size originalMaxWidthPageSize;
     private final Size originalMaxHeightPageSize;
     private final Size viewSize;
@@ -28,7 +28,7 @@ public class PageSizeCalculator {
     private SizeF optimalMaxHeightPageSize;
     private float widthRatio;
     private float heightRatio;
-    private boolean fitEachPage;
+    private final boolean fitEachPage;
 
     public PageSizeCalculator(FitPolicy fitPolicy, Size originalMaxWidthPageSize, Size originalMaxHeightPageSize,
                               Size viewSize, boolean fitEachPage) {

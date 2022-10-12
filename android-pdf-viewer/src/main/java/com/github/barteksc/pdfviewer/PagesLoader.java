@@ -30,7 +30,7 @@ import static com.github.barteksc.pdfviewer.util.Constants.PRELOAD_OFFSET;
 
 class PagesLoader {
 
-    private PDFView pdfView;
+    private final PDFView pdfView;
     private int cacheOrder;
     private float xOffset;
     private float yOffset;
@@ -41,7 +41,7 @@ class PagesLoader {
     private final RectF thumbnailRect = new RectF(0, 0, 1, 1);
     private final int preloadOffset;
 
-    private class Holder {
+    private static class Holder {
         int row;
         int col;
 
@@ -78,7 +78,7 @@ class PagesLoader {
         }
     }
 
-    private class GridSize {
+    private static class GridSize {
         int rows;
         int cols;
 

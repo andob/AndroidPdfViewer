@@ -15,6 +15,7 @@
  */
 package com.github.barteksc.pdfviewer;
 
+import android.annotation.SuppressLint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.view.GestureDetector;
@@ -37,16 +38,17 @@ import static com.github.barteksc.pdfviewer.util.Constants.Pinch.MINIMUM_ZOOM;
  */
 class DragPinchManager implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener, ScaleGestureDetector.OnScaleGestureListener, View.OnTouchListener {
 
-    private PDFView pdfView;
-    private AnimationManager animationManager;
+    private final PDFView pdfView;
+    private final AnimationManager animationManager;
 
-    private GestureDetector gestureDetector;
-    private ScaleGestureDetector scaleGestureDetector;
+    private final GestureDetector gestureDetector;
+    private final ScaleGestureDetector scaleGestureDetector;
 
     private boolean scrolling = false;
     private boolean scaling = false;
     private boolean enabled = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     DragPinchManager(PDFView pdfView, AnimationManager animationManager) {
         this.pdfView = pdfView;
         this.animationManager = animationManager;
@@ -285,6 +287,7 @@ class DragPinchManager implements GestureDetector.OnGestureListener, GestureDete
     }
 
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouch(View v, MotionEvent event) {
         if (!enabled) {
             return false;

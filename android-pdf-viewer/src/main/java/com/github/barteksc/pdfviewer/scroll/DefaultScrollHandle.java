@@ -1,15 +1,18 @@
 package com.github.barteksc.pdfviewer.scroll;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
+import android.os.Looper;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.R;
@@ -25,17 +28,12 @@ public class DefaultScrollHandle extends RelativeLayout implements ScrollHandle 
 
     protected TextView textView;
     protected Context context;
-    private boolean inverted;
+    private final boolean inverted;
     private PDFView pdfView;
     private float currentPos;
 
-    private Handler handler = new Handler();
-    private Runnable hidePageScrollerRunnable = new Runnable() {
-        @Override
-        public void run() {
-            hide();
-        }
-    };
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private final Runnable hidePageScrollerRunnable = this::hide;
 
     public DefaultScrollHandle(Context context) {
         this(context, false);
@@ -78,11 +76,7 @@ public class DefaultScrollHandle extends RelativeLayout implements ScrollHandle 
             }
         }
 
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            setBackgroundDrawable(background);
-        } else {
-            setBackground(background);
-        }
+        setBackground(background);
 
         LayoutParams lp = new LayoutParams(Util.getDP(context, width), Util.getDP(context, height));
         lp.setMargins(0, 0, 0, 0);
@@ -201,6 +195,7 @@ public class DefaultScrollHandle extends RelativeLayout implements ScrollHandle 
     }
 
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
 
         if (!isPDFViewReady()) {

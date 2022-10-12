@@ -20,13 +20,13 @@ import android.graphics.RectF;
 
 public class PagePart {
 
-    private int page;
+    private final int page;
 
-    private Bitmap renderedBitmap;
+    private final Bitmap renderedBitmap;
 
-    private RectF pageRelativeBounds;
+    private final RectF pageRelativeBounds;
 
-    private boolean thumbnail;
+    private final boolean thumbnail;
 
     private int cacheOrder;
 

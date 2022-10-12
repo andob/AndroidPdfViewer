@@ -29,8 +29,6 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.HandlerThread;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -112,8 +110,6 @@ public class PDFView extends RelativeLayout {
         NONE, START, END
     }
 
-    private ScrollDir scrollDir = ScrollDir.NONE;
-
     /** Rendered parts go to the cache manager */
     CacheManager cacheManager;
 
@@ -150,9 +146,6 @@ public class PDFView extends RelativeLayout {
 
     /** Current state of the view */
     private State state = State.DEFAULT;
-
-    /** Async task used during the loading phase to decode a PDF document */
-    private DecodingAsyncTask decodingAsyncTask;
 
     /** The thread {@link #renderingHandler} will run on */
     private HandlerThread renderingHandlerThread;
@@ -220,7 +213,7 @@ public class PDFView extends RelativeLayout {
 
     /** Antialiasing and bitmap filtering */
     private boolean enableAntialiasing = true;
-    private PaintFlagsDrawFilter antialiasFilter =
+    private final PaintFlagsDrawFilter antialiasFilter =
             new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
     /** Spacing between pages, in px */
@@ -233,7 +226,7 @@ public class PDFView extends RelativeLayout {
     private boolean pageFling = true;
 
     /** Pages numbers used when calling onDrawAllListener */
-    private List<Integer> onDrawPagesNums = new ArrayList<>(10);
+    private final List<Integer> onDrawPagesNums = new ArrayList<>(10);
 
     /** Holds info whether view has been added to layout and has width and height */
     private boolean hasSize = false;
@@ -242,8 +235,18 @@ public class PDFView extends RelativeLayout {
     private Configurator waitingDocumentConfigurator;
 
     /** Construct the initial view */
+    public PDFView(Context context) {
+        super(context);
+        initialize(context);
+    }
+
+    /** Construct the initial view */
     public PDFView(Context context, AttributeSet set) {
         super(context, set);
+        initialize(context);
+    }
+
+    private void initialize(Context context) {
 
         renderingHandlerThread = new HandlerThread("PDF renderer");
 
@@ -275,9 +278,9 @@ public class PDFView extends RelativeLayout {
         }
 
         recycled = false;
+
         // Start decoding document
-        decodingAsyncTask = new DecodingAsyncTask(docSource, password, userPages, this, pdfiumCore);
-        decodingAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new DecodingTask(docSource, password, userPages, pdfiumCore).decodeIntoView(this);
     }
 
     /**
@@ -422,9 +425,6 @@ public class PDFView extends RelativeLayout {
             renderingHandler.stop();
             renderingHandler.removeMessages(RenderingHandler.MSG_RENDER_TASK);
         }
-        if (decodingAsyncTask != null) {
-            decodingAsyncTask.cancel(true);
-        }
 
         // Clear caches
         cacheManager.recycle();
@@ -466,11 +466,7 @@ public class PDFView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         recycle();
         if (renderingHandlerThread != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                renderingHandlerThread.quitSafely();
-            } else {
-                renderingHandlerThread.quit();
-            }
+            renderingHandlerThread.quitSafely();
             renderingHandlerThread = null;
         }
         super.onDetachedFromWindow();
@@ -822,6 +818,7 @@ public class PDFView extends RelativeLayout {
      * @param moveHandle whether to move scroll handle or not
      */
     public void moveTo(float offsetX, float offsetY, boolean moveHandle) {
+        ScrollDir scrollDir = ScrollDir.NONE;
         if (swipeVertical) {
             // Check X offset
             float scaledPageWidth = toCurrentScale(pdfFile.getMaxPageWidth());

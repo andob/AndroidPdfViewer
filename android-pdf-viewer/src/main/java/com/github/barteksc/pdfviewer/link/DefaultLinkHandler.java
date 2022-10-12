@@ -15,6 +15,7 @@
  */
 package com.github.barteksc.pdfviewer.link;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,7 +28,7 @@ public class DefaultLinkHandler implements LinkHandler {
 
     private static final String TAG = DefaultLinkHandler.class.getSimpleName();
 
-    private PDFView pdfView;
+    private final PDFView pdfView;
 
     public DefaultLinkHandler(PDFView pdfView) {
         this.pdfView = pdfView;
@@ -44,6 +45,7 @@ public class DefaultLinkHandler implements LinkHandler {
         }
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
     private void handleUri(String uri) {
         Uri parsedUri = Uri.parse(uri);
         Intent intent = new Intent(Intent.ACTION_VIEW, parsedUri);
