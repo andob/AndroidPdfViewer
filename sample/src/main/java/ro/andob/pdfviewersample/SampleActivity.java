@@ -21,7 +21,7 @@ public class SampleActivity extends AppCompatActivity
         pdfView.setBackgroundColor(Color.LTGRAY);
         setContentView(pdfView);
 
-        String url = "https://www.africau.edu/images/default/sample.pdf";
+        String url = "https://pdfobject.com/pdf/sample.pdf";
         File file = getFileStreamPath("sample.pdf");
 
         Run.async(() -> FileUtils.copyURLToFile(new URL(url), file)).onSuccess(() ->

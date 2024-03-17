@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:8.3.0'
     }
 }
 
@@ -16,9 +16,11 @@ allprojects {
         maven { url "https://maven.andob.info/repository/open_source" }
     }
     gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xmaxerrs" << "5000"
-            options.compilerArgs << "-Xlint:deprecation"
+        tasks.withType(JavaCompile).tap {
+            configureEach {
+                options.compilerArgs << "-Xmaxerrs" << "5000"
+                options.compilerArgs << "-Xlint:deprecation"
+            }
         }
     }
 }

@@ -2,14 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'ro.andob.pdfviewersample'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "ro.andob.pdfviewersample"
         minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0.0"
+        targetSdk 34
     }
 
     buildTypes {
@@ -27,15 +25,15 @@ android {
 
 dependencies {
     //appcompat
-    implementation 'androidx.appcompat:appcompat:1.7.0-alpha01'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //apache commons IO
-    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'commons-io:commons-io:2.13.0'
 
     //rapidroid
-    implementation 'ro.andob.rapidroid:rapidroid-api:1.3.6'
-    implementation 'ro.andob.rapidroid:rapidroid-core:1.3.6'
-    implementation 'ro.andob.rapidroid:rapidroid-futures:1.3.6'
+    implementation 'ro.andob.rapidroid:rapidroid-api:1.3.7'
+    implementation 'ro.andob.rapidroid:rapidroid-core:1.3.7'
+    implementation 'ro.andob.rapidroid:rapidroid-futures:1.3.7'
 
     //library
     implementation project(":android-pdf-viewer")
