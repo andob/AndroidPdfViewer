@@ -1,6 +1,6 @@
 ## Pdfium Android bindings
 
-### This is a fork of [barteksc/AndroidPdfViewer](https://github.com/barteksc/AndroidPdfViewer). This is an up to date version of the library, since the original library is abandonware. It uses latest version of Pdfium (as of nov 2022), it is migrated to AndroidX, it uses latest target SDK level.
+### This is a fork of [barteksc/AndroidPdfViewer](https://github.com/barteksc/AndroidPdfViewer). This is an up to date version of the library, since the original library is abandonware. It uses latest version of Pdfium, it is migrated to AndroidX, it uses latest target SDK level.
 
 ### Import
 
