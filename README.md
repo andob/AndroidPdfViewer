@@ -12,8 +12,8 @@ repositories {
 
 ```
 dependencies {
-    implementation 'ro.andob.pdfium-android:pdfium-android:1.1.1'
-    implementation 'ro.andob.pdfium-android:pdfium-android-viewer:1.0.3'
+    implementation 'ro.andob.pdfium-android:pdfium-android:1.1.2'
+    implementation 'ro.andob.pdfium-android:pdfium-android-viewer:1.0.4'
 }
 ```
 
