@@ -40,7 +40,7 @@ class DecodingTask {
     @SuppressWarnings("UnnecessaryLocalVariable")
     public void decodeIntoView(PDFView pdfView) {
 
-        Future<PdfFile> future = Run.async(() -> {
+        Future<PdfFile> future = Run.future(() -> {
             PdfDocument pdfDocument = docSource.createDocument(pdfView.getContext(), pdfiumCore, password);
             Size pdfViewSize = new Size(pdfView.getWidth(), pdfView.getHeight());
             PdfFile pdfFile = new PdfFile(pdfiumCore, pdfDocument, pdfView.getPageFitPolicy(), pdfViewSize,

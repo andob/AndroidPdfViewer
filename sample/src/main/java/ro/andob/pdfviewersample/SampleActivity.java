@@ -24,7 +24,7 @@ public class SampleActivity extends AppCompatActivity
         String url = "https://pdfobject.com/pdf/sample.pdf";
         File file = getFileStreamPath("sample.pdf");
 
-        Run.async(() -> FileUtils.copyURLToFile(new URL(url), file)).onSuccess(() ->
+        Run.future(() -> FileUtils.copyURLToFile(new URL(url), file)).onSuccess(() ->
             pdfView.fromFile(file)
                 .autoSpacing(false).spacing(4)
                 .enableSwipe(true)
