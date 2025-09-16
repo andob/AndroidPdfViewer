@@ -52,7 +52,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.1'
 
     //pdfium
-    implementation 'ro.andob.pdfium-android:pdfium-android:1.1.3'
+    implementation 'ro.andob.pdfium-android:pdfium-android:1.1.4'
 
     //rapidroid
     implementation 'ro.andob.rapidroid:rapidroid-api:1.4.0'
