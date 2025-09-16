@@ -75,7 +75,7 @@ project.afterEvaluate {
                 from components.release
                 groupId 'ro.andob.pdfium-android'
                 artifactId 'pdfium-android-viewer'
-                version '1.0.5'
+                version '1.0.6'
             }
         }
     }
